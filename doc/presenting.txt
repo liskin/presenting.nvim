@@ -31,6 +31,8 @@ Default values:
     options = {
       -- The width of the slide buffer.
       width = 60,
+      -- The "title" in the footer.
+      footer_text = "presenting.nvim",
     },
     separator = {
       -- Separators for different filetypes.
