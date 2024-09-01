@@ -40,6 +40,8 @@ Presenting.config = {
   options = {
     -- The width of the slide buffer.
     width = 60,
+    -- The "title" in the footer.
+    footer_text = "presenting.nvim",
   },
   separator = {
     -- Separators for different filetypes.
@@ -289,7 +291,7 @@ H.create_slide_view = function(state)
 
   -- TODO: maybe just use vims statusline instead of my custom footer :)
   state.footer_buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_lines(state.footer_buf, 0, -1, false, { "presenting.nvim" })
+  vim.api.nvim_buf_set_lines(state.footer_buf, 0, -1, false, { Presenting.config.options.footer_text })
   state.footer_win = vim.api.nvim_open_win(state.footer_buf, false, window_config.footer)
 
   state.slide_buf = vim.api.nvim_create_buf(false, true)
@@ -346,7 +348,7 @@ H.set_slide_content = function(state, slide)
   )
   vim.api.nvim_buf_set_option(state.slide_buf, "modifiable", orig_modifiable)
 
-  local footer_text = "presenting.nvim | " .. state.slide .. "/" .. state.n_slides
+  local footer_text = Presenting.config.options.footer_text .. " | " .. state.slide .. "/" .. state.n_slides
   vim.api.nvim_buf_set_lines(state.footer_buf, 0, -1, false, { footer_text })
 end
 
